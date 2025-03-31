@@ -42,9 +42,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           
+          - name: Show working directory
+            run: pwd
+
+          - name: List project structure
+            run: ls -la
+            
           - name: Build JAR file
             run: mvn clean package -DskipTests
-            working-directory: ./mars-deployment
 
           - name: Checkout code
             uses: actions/checkout@v4
@@ -56,8 +61,7 @@ jobs:
             run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
    
           - name: Build Docker Image using Buildx
-            run: docker buildx build . --tag ${{ secrets.DOCKER_USERNAME }}/mars-deployment --load
-            working-directory: ./mars-deployment
+            run: docker buildx build . --tag ${{ secrets.DOCKER_USERNAME }}/mars-deployment --load  
  
           - name: Push Docker Image
             run: docker push ${{ secrets.DOCKER_USERNAME }}/mars-deployment
