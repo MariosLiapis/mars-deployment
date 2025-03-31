@@ -42,18 +42,18 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           
+          - name: Checkout code
+            uses: actions/checkout@v4
+            
           - name: Show working directory
             run: pwd
 
           - name: List project structure
             run: ls -la
-
-          - name: Checkout code
-            uses: actions/checkout@v4
           
           - name: Build JAR file
             run: mvn clean package -DskipTests
-            
+
           - name: Set up Docker Buildx
             uses: docker/setup-buildx-action@v3
 
