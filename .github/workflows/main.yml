@@ -22,20 +22,18 @@ jobs:
              path: ~/.m2
              key: maven-${{ hashFiles('**/pom.xml') }}
              restore-keys: maven-
+
           - name: Run Checkstyle
             run: mvn checkstyle:check
+
           - name: Run JaCoCo Test Coverage
             run: mvn test jacoco:report
+
           - name: Run Integration Tests
             run: mvn verify
+
           - name: Run PMD Static code analysis 
             run: mvn pmd:check
- 
-          - name: Check Docker Installation
-            run: docker --version
- 
-          - name: Verify Dockerfile Exists
-            run: ls -la
  
      deploy:
          needs: build
