@@ -1,50 +1,58 @@
 name: CI/CD
-
+  
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
+     push:
+         branches: [main]
+     pull_request:
+         branches: [main]
+ 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: "temurin"
-          java-version: "21"
-          cache: "maven"
-      - uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: maven-
-      - name: Run Checkstyle
-        run: mvn checkstyle:check
-      - name: Run JaCoCo Test Coverage
-        run: mvn test jacoco:report
-      - name: Run Integration Tests
-        run: mvn verify
-
-      - name: Check Docker Installation
-        run: docker --version
-
-      - name: Verify Dockerfile Exists
-        run: ls -la
-
-      - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-      - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/mars-deployment:latest -f DOCKERFILE .
-
-      - name: Push Docker Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/mars-deployment:latest
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Deploying application..."
+     build:
+         runs-on: ubuntu-latest
+ 
+         steps:
+          - uses: actions/checkout@v4
+          - uses: actions/setup-java@v4
+            with:
+             distribution: "temurin"
+             java-version: "21"
+             cache: "maven"
+          - uses: actions/cache@v3
+            with:
+             path: ~/.m2
+             key: maven-${{ hashFiles('**/pom.xml') }}
+             restore-keys: maven-
+          - name: Run Checkstyle
+            run: mvn checkstyle:check
+          - name: Run JaCoCo Test Coverage
+            run: mvn test jacoco:report
+          - name: Run Integration Tests
+            run: mvn verify
+          - name: Run PMD Static code analysis 
+            run: mvn pmd:check
+ 
+          - name: Check Docker Installation
+            run: docker --version
+ 
+          - name: Verify Dockerfile Exists
+            run: ls -la
+ 
+     deploy:
+         needs: build
+         runs-on: ubuntu-latest
+         steps:
+ 
+           - name: Checkout code
+             uses: actions/checkout@v4
+             
+           - name: Set up Docker Buildx
+             uses: docker/setup-buildx-action@v3
+ 
+           - name: Log in to Docker Hub
+             run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+ 
+           - name: Build Docker Image using Buildx
+             run: docker buildx build . --tag ${{ secrets.DOCKER_USERNAME }}/mars-deployment --load
+ 
+           - name: Push Docker Image
+             run: docker push ${{ secrets.DOCKER_USERNAME }}/mars-deployment
