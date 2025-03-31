@@ -47,13 +47,13 @@ jobs:
 
           - name: List project structure
             run: ls -la
-            
-          - name: Build JAR file
-            run: mvn clean package -DskipTests
 
           - name: Checkout code
             uses: actions/checkout@v4
-
+          
+          - name: Build JAR file
+            run: mvn clean package -DskipTests
+            
           - name: Set up Docker Buildx
             uses: docker/setup-buildx-action@v3
 
