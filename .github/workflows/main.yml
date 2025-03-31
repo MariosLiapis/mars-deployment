@@ -15,12 +15,12 @@ jobs:
          - uses: actions/setup-java@v4
            with:
             distribution: "temurin"
-            java-version: "24"
+            java-version: "21"
             cache: "maven"
          - name: Run Checkstyle
            run: mvn checkstyle:check
-         #- name: Run JaCoCo Test Coverage
-          # run: mvn test jacoco:report
+         - name: Run JaCoCo Test Coverage
+           run: mvn test jacoco:report
          - name: Run Integration Tests
            run: mvn verify
          - name: Run PMD Static code analysis 
