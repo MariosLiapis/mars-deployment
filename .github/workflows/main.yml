@@ -44,7 +44,8 @@ jobs:
           
           - name: Build JAR file
             run: mvn clean package -DskipTests
-            
+            working-directory: ./mars-deployment
+
           - name: Checkout code
             uses: actions/checkout@v4
 
@@ -56,6 +57,7 @@ jobs:
    
           - name: Build Docker Image using Buildx
             run: docker buildx build . --tag ${{ secrets.DOCKER_USERNAME }}/mars-deployment --load
+            working-directory: ./mars-deployment
  
           - name: Push Docker Image
             run: docker push ${{ secrets.DOCKER_USERNAME }}/mars-deployment
