@@ -17,11 +17,11 @@ jobs:
             distribution: "temurin"
             java-version: "21"
             cache: "maven"
-         #- uses: actions/cache@v3
-          # with:
-           # path: ~/.m2
-            #key: maven-${{ hashFiles('**/pom.xml') }}
-            #restore-keys: maven-
+         - uses: actions/cache@v3
+           with:
+            path: ~/.m2
+            key: maven-java21-${{ hashFiles('**/pom.xml') }}
+            restore-keys: maven-
          - name: Run Checkstyle
            run: mvn checkstyle:check
          - name: Run JaCoCo Test Coverage
