@@ -36,6 +36,12 @@ jobs:
       
          - name: Verify Dockerfile Exists
            run: ls -la
+           
+         - name: Print Java version
+           run: java -version
+         
+         - name: Print Maven version
+           run: mvn -v
         
     deploy:
         needs: build
