@@ -6,7 +6,6 @@ WORKDIR /app
 
 EXPOSE 8080
 
-ADD target/mars-deployment-0.0.1-SNAPSHOT.jar mars-deployment-0.0.1-SNAPSHOT.jar
 
 # Copy the built JAR file into the container
 
