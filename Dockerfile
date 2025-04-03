@@ -5,8 +5,8 @@ FROM openjdk:21-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR file into the container
-#COPY target/mars-deployment-0.0.1-SNAPSHOT.jar app.jar
-COPY target/*.jar app.jar
+
+COPY C:\Users\mario\Desktop\mars-deployment\target\mars-deployment-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
