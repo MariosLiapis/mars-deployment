@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy the built JAR file into the container
 
-COPY C:\Users\mario\Desktop\mars-deployment\target\mars-deployment-0.0.1-SNAPSHOT.jar app.jar
+COPY target\mars-deployment-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
