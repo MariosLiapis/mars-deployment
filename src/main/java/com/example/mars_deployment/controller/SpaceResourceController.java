@@ -66,7 +66,7 @@ public class SpaceResourceController {
     /**
      * Updates an existing resource by ID.
      *
-     * @param id          the resource ID
+     * @param id the resource ID
      * @param newResource the updated resource data
      * @return the updated resource, or 404 if not found
      */
