@@ -27,11 +27,9 @@ Model-Repository-Controller architecture (simplified full MVC), used in RESTful 
   -Defined in SpaceResources.java
   -Structure of the domain objects (ID, name, quantity)
   -@Entity maps it to an H2 database table
-
 2.Repository
   -SpaceResourceRepository.java extends JpaRepository
   -Acts as the DAO layer
-
 3.Controller 
   -SpaceResourceController.java
   -Annotated with @RestController
