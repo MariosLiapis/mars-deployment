@@ -19,6 +19,19 @@ The purpose of this project is to demonstrate a complete CI/CD pipeline by devel
 - **CI/CD**: GitHub Actions
 - **Containerization**: Docker, Docker Hub
 
+## Application Template:
+
+Model-Repository-Controller architecture (simplified full MVC), used in RESTful backens APIs with no front-end layer.
+
+1.Model
+  -Defined in SpaceResources.java
+  -Structure of the domain objects (ID, name, quantity)
+  -@Entity maps it to an H2 database table
+
+2.Repository
+  -SpaceResourceRepository.java extends JpaRepository
+  -Built-in database operations (findall(), save(), deleteById()
+
 ## Running Locally
 
 1. Clone the repository: git clone https://github.com/mariosliapis/mars-deployment.git
