@@ -49,3 +49,4 @@ Model-Repository-Controller architecture (simplified full MVC), used in RESTful 
 1. Build the Docker image: docker build -t mars-deployment .
 2. Run the container: docker run -p 8080:8080 mars-deployment
 3. Access the application at: http://localhost:8080/resources
+3. Access the application at: http://localhost:8080/resources 
