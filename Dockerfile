@@ -10,7 +10,9 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Runtime stage
+FROM eclipse-temurin:21-jre
 
+WORKDIR /app
 # Copy the built JAR file into the container
 
 COPY --from=build /app/target/*.jar app.jar
