@@ -30,7 +30,12 @@ Model-Repository-Controller architecture (simplified full MVC), used in RESTful 
 
 2.Repository
   -SpaceResourceRepository.java extends JpaRepository
-  -Built-in database operations (findall(), save(), deleteById()
+  -Acts as the DAO layer
+
+3.Controller 
+  -SpaceResourceController.java
+  -Annotated with @RestController
+  -Handles HTTP requests (GET, POST, PUT, DELETE) and maps them to repository actions
 
 ## Running Locally
 
